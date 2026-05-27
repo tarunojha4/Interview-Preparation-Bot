@@ -1,0 +1,11 @@
+streamlit>=1.32.0
+requests>=2.31.0
+python-dotenv>=1.0.0
+ollama>=0.1.8
+langchain>=0.1.0
+langchain-community>=0.0.20
+langchain-ollama>=0.1.0
+pydantic>=2.0.0
+chromadb>=0.4.0
+sentence-transformers>=2.2.0chromadb>=0.4.0
+sentence-transformers>=2.2.0
