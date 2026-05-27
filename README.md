@@ -7,14 +7,14 @@ An advanced, end-to-end local AI-powered platform designed to mentor and prepare
 ---
 
 ## 🔗 Live Application Link
-Aap is project ko bina install kiye direct niche di gayi link par click karke internet par run kar sakte hain:
+You can run this project directly on the internet without installing it by clicking on the link given below:
 👉 **[Click Here to Run the Project Live](https://share.streamlit.io/tarunojha4/interview-preparation-bot/main/app.py)**
 
 ---
 
 ## ✨ Features Dashboard
 
-Project ke andar aapko interview crack karne ke liye yeh saare 12 features milte hain:
+Within Project, you get these 12 features to crack the interview:
 
 - **🤖 Mock Interview Mode:** Generates situational and algorithmic questions sequentially based on tech stack and difficulty.
 - **🧠 Evaluate Answer:** Analyzes user responses locally to give transparent breakdown critiques and assignment scores out of 10.
@@ -33,7 +33,7 @@ Project ke andar aapko interview crack karne ke liye yeh saare 12 features milte
 
 ## 📥 How to Clone and Run Locally
 
-Agar aap is repository ko apne local system par clone karke chalana chahte hain, toh apne terminal mein yeh commands run karein:
+If you want to clone and run this repository on your local system, run these commands in your terminal:
 
 ```bash
 # 1. Repository ko clone karein
