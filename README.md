@@ -36,8 +36,8 @@ Within Project, you get these 12 features to crack the interview:
 If you want to clone and run this repository on your local system, run these commands in your terminal:
 
 ```bash
-# 1. Repository ko clone karein
+# 1. Clone this Repository
 git clone [https://github.com/tarunojha4/interview-preparation-bot.git](https://github.com/tarunojha4/interview-preparation-bot.git)
 
-# 2. Project folder ke andar jaayein
+# 2. Go to the Project folder
 cd interview-preparation-bot
