@@ -10,3 +10,4 @@ chromadb>=0.4.0
 sentence-transformers>=2.2.0chromadb>=0.4.0
 sentence-transformers>=2.2.0
 groq
+fpdf
