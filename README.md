@@ -34,15 +34,11 @@ An AI-powered interview preparation platform that runs on **Streamlit Cloud**. I
 1. Push this repo to GitHub (see below).
 2. Go to [share.streamlit.io](https://share.streamlit.io) → **New app**.
 3. Set **Repository** to `tarunojha4/interview-preparation-bot`, **Branch** `main`, **Main file** `app.py`.
-4. Under **Advanced settings → Secrets**, add:
-
-```toml
-GROQ_API_KEY = "your-groq-api-key"
-```
-
+4. Under **Advanced settings → Secrets**,
+5.  
 Get a free key at [console.groq.com](https://console.groq.com).
 
-5. Click **Deploy**. First build installs only 4 lightweight packages (~30s vs minutes with ChromaDB).
+6. Click **Deploy**. First build installs only 4 lightweight packages (~30s vs minutes with ChromaDB).
 
 ---
 
