@@ -1,0 +1,20 @@
+# Secrets & env
+.env
+.streamlit/secrets.toml
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Local databases & vector stores (rebuilt at runtime)
+interview_bot.db
+chroma_db/
+
+# IDE / OS
+.DS_Store
+.idea/
+.vscode/
+.streamlit/secrets.toml

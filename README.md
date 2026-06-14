@@ -1,43 +1,108 @@
 # 🚀 AI Interview Preparation Bot
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_svg.svg)](https://share.streamlit.io/tarunojha4/interview-preparation-bot/main/app.py)
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black.svg)](https://share.streamlit.io/tarunojha4/interview-preparation-bot/main/app.py)
 
-An advanced, end-to-end local AI-powered platform designed to mentor and prepare candidates for core technical interviews. It conducts dynamic mock interviews, reviews core system layouts, grades answer quality using a local LLM, and maintains records via a local Vector Database.
-
----
-
-## 🔗 Live Application Link
-You can run this project directly on the internet without installing it by clicking on the link given below:
-👉 **[Click Here to Run the Project Live](https://share.streamlit.io/tarunojha4/interview-preparation-bot/main/app.py)**
+An AI-powered interview preparation platform that runs on **Streamlit Cloud**. It generates mock questions, evaluates answers with **Groq + LLaMA 3.1**, and stores a searchable question bank in SQLite (auto-seeded with 50+ Data Science / ML questions).
 
 ---
 
-## ✨ Features Dashboard
+## 🔗 Live App
 
-Within Project, you get these 12 features to crack the interview:
-
-- **🤖 Mock Interview Mode:** Generates situational and algorithmic questions sequentially based on tech stack and difficulty.
-- **🧠 Evaluate Answer:** Analyzes user responses locally to give transparent breakdown critiques and assignment scores out of 10.
-- **💡 Hints Mode:** Provides dynamic contextual clues if the candidate gets stuck mid-thought.
-- **⚡ Flashcards:** Interactive revision decks for quick conceptual sweeps over key topics.
-- **📄 JD Analyzer:** Parses job descriptions to automatically extract expected focus areas and stacks.
-- **📝 Resume Questions:** Tailors highly specific architectural questions by screening user profile history.
-- **🏢 Company Prep:** Curates standard past interview tracks from top tech entities.
-- **🗺️ Study Roadmap:** Computes tailored learning path trajectories with milestone schedules.
-- **📈 Score Dashboard:** Visualizes history matrices over past performances to identify structural progression trends.
-- **⏱️ Timed Mode:** Adds real-time clock pressures to evaluation pipelines to replicate practical pressurized coding tracks.
-- **📚 Question Bank:** Offers a centralized local knowledge index via **ChromaDB Vector Database** to query past mock transcripts.
-- **🗂️ Export PDF:** Generates portable formatted analytics reports of historical interview feedbacks.
+👉 **[Run on Streamlit Cloud](https://share.streamlit.io/tarunojha4/interview-preparation-bot/main/app.py)**
 
 ---
 
-## 📥 How to Clone and Run Locally
+## ✨ Features
 
-If you want to clone and run this repository on your local system, run these commands in your terminal:
+- **Mock Interview Mode** — Sequential situational and technical questions
+- **Evaluate Answer** — AI scoring with feedback out of 10
+- **Hints Mode** — Progressive clues when you're stuck
+- **Flashcards** — Quick revision decks
+- **JD Analyzer** — Extract focus areas from job descriptions
+- **Resume Questions** — Tailored questions from your profile
+- **Company Prep** — Company-specific interview tracks
+- **Study Roadmap** — Personalized learning paths
+- **Score Dashboard** — Track performance over time
+- **Timed Mode** — Practice under time pressure
+- **Question Bank** — Browse 50+ pre-loaded DS/ML questions (SQLite, auto-seeded on startup)
+- **Export PDF** — Download reports
+
+---
+
+## ☁️ Deploy on Streamlit Cloud
+
+1. Push this repo to GitHub (see below).
+2. Go to [share.streamlit.io](https://share.streamlit.io) → **New app**.
+3. Set **Repository** to `tarunojha4/interview-preparation-bot`, **Branch** `main`, **Main file** `app.py`.
+4. Under **Advanced settings → Secrets**, add:
+
+```toml
+GROQ_API_KEY = "your-groq-api-key"
+```
+
+Get a free key at [console.groq.com](https://console.groq.com).
+
+5. Click **Deploy**. First build installs only 4 lightweight packages (~30s vs minutes with ChromaDB).
+
+---
+
+## 📥 Run Locally
 
 ```bash
-# 1. Clone this Repository
-git clone [https://github.com/tarunojha4/interview-preparation-bot.git](https://github.com/tarunojha4/interview-preparation-bot.git)
-
-# 2. Go to the Project folder
+git clone https://github.com/tarunojha4/interview-preparation-bot.git
 cd interview-preparation-bot
+python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+Create `.streamlit/secrets.toml` (never commit this file):
+
+```toml
+GROQ_API_KEY = "your-groq-api-key"
+```
+
+```bash
+streamlit run app.py
+```
+
+Open [http://localhost:8501](http://localhost:8501).
+
+---
+
+## 📤 Push to GitHub
+
+```bash
+git add .
+git commit -m "Optimize for Streamlit Cloud deployment"
+git push origin main
+```
+
+If Streamlit Cloud is already linked to this repo, it redeploys automatically on push.
+
+---
+
+## 🗂️ Project Structure
+
+```
+interview-preparation-bot/
+├── app.py              # Main Streamlit app (entry point)
+├── requirements.txt    # Minimal dependencies for fast cloud builds
+├── .streamlit/
+│   └── config.toml       # Theme & server settings
+└── README.md
+```
+
+---
+
+## 🔑 Environment
+
+| Variable | Where | Purpose |
+|----------|-------|---------|
+| `GROQ_API_KEY` | Streamlit secrets or `.streamlit/secrets.toml` | Groq API access |
+| `DB_PATH` | Optional env var | SQLite path (default: `/tmp` on cloud) |
+
+---
+
+## ⚠️ Security Note
+
+Never commit API keys or `.streamlit/secrets.toml`. If a key was ever pushed to GitHub, rotate it at [console.groq.com](https://console.groq.com).

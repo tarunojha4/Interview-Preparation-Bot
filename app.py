@@ -1,17 +1,21 @@
-import streamlit as st
-import requests
-import json
-import time
+import os
 import sqlite3
 import datetime
 import base64
 import re
-import pandas as pd
-from fpdf import FPDF
-from groq import Groq  # <-- Groq SDK Custom Integration
 
-# ── DATABASE PATH CONFIGURATION ───────────────────────────────────────────────
-DB_PATH = "interview_bot.db"
+import pandas as pd
+import streamlit as st
+from fpdf import FPDF
+from groq import Groq
+
+st.set_page_config(page_title="Interview Prep Bot", page_icon="🎯", layout="wide")
+
+# Ephemeral storage on Streamlit Cloud; local file otherwise.
+DB_PATH = os.environ.get(
+    "DB_PATH",
+    "/tmp/interview_bot.db" if os.environ.get("STREAMLIT_RUNTIME_ENV") == "cloud" else "interview_bot.db",
+)
 
 # ── INTEGRATED VECTOR STORE FUNCTIONS (SQLite Backup Mode with Auto-Seeding) ──
 VECTOR_DB = True
@@ -135,24 +139,22 @@ def total_questions_all():
     conn.close()
     return count
 
-# ── GROQ CLOUD CONFIGURATION ──────────────────────────────────────────────────
-if "GROQ_API_KEY" in st.secrets:
-    client = Groq(api_key=st.secrets["GROQ_API_KEY"])
-    GROQ_READY = True
-elif st.sidebar.text_input("Groq API Key Fallback", type="password"):
-    client = Groq(api_key=st.sidebar.text_input("Groq API Key Fallback", type="password"))
-    GROQ_READY = True
-else:
-    GROQ_READY = False
+GROQ_MODEL = "llama-3.1-8b-instant"
 
-GROQ_MODEL = "llama-3.1-8b-instant" 
+def _init_groq_client():
+    if "groq_client" not in st.session_state:
+        st.session_state.groq_client = None
+    if st.session_state.groq_client is None and "GROQ_API_KEY" in st.secrets:
+        st.session_state.groq_client = Groq(api_key=st.secrets["GROQ_API_KEY"])
+
+_init_groq_client()
+client = st.session_state.groq_client
+GROQ_READY = client is not None
 
 INTERVIEW_TYPES   = ["Software Engineering / Coding", "Data Science / ML", "System Design", "HR / Behavioral"]
 DIFFICULTY_LEVELS = ["Beginner", "Intermediate", "Advanced"]
 EXPERIENCE_LEVELS = ["Fresher (0-1 yr)", "Junior (1-3 yrs)", "Mid (3-5 yrs)", "Senior (5+ yrs)"]
 COMPANIES         = ["None (General)", "Google", "Amazon", "Microsoft", "Meta", "Netflix", "Apple", "Flipkart", "Infosys", "TCS", "Wipro"]
-
-st.set_page_config(page_title="Interview Prep Bot", page_icon="🎯", layout="wide")
 
 st.markdown("""
 <style>
@@ -329,6 +331,12 @@ st.markdown("*Powered by Groq Cloud + LLaMA 3.1 Architecture — Your Private AI
 
 # ── SIDEBAR SELECTION PANEL ───────────────────────────────────────────────────
 with st.sidebar:
+    if not GROQ_READY:
+        api_key = st.text_input("Groq API Key", type="password", help="Required for AI features. Add GROQ_API_KEY in Streamlit Cloud secrets to skip this.")
+        if api_key:
+            st.session_state.groq_client = Groq(api_key=api_key)
+            st.rerun()
+
     st.markdown("## 👤 User Profile")
     uname = st.text_input("Your name", value=st.session_state.username)
     if st.button("🔐 Login / Switch", use_container_width=True):
